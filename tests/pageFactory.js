@@ -14,8 +14,14 @@ export const test=base.extend({
         await use(new checkoutOnePage(page))
     },
     checkouttwopage:async ({page},use)=>{
-        await use(new checkoutTwoPage(page))
+        await use(new checkoutTwoPage(page))  
     },
+    pageSetUp:async ({loginpage},use)=>{
+        await loginpage.applaunching()
+        await loginpage.loginToAccount("visual_user","secret_sauce")
+        await loginpage.clickLogin()
+        await use();
+    }
 })
 
 export {expect}
