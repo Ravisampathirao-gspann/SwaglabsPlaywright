@@ -1,6 +1,6 @@
 import { test, expect } from './pageFactory.js'
 
-test('test', async ({ checkoutonepage }) => {
+test('test', async ({ page,checkoutonepage }) => {
   await page.goto('https://www.saucedemo.com/');
   
   await page.locator('[data-test="username"]').click();
