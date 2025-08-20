@@ -5,7 +5,9 @@ constructor(page){
     this.lastNameLoc=page.locator('[data-test="lastName"]')
     this.postalCodeLoc=page.locator('[data-test="postalCode"]')
     this.continueBtn=page.locator('[data-test="continue"]')
-    this.firstNameErrorLoc=page.locator('[data-test="continue"]')
+    this.firstNameErrorLoc=page.locator("//h3[text()='Error: First Name is required']")
+    this.lastNameErrorLoc = page.locator("//h3[text()='Error: Last Name is required']")
+    this.postalCodeErrorLoc = page.locator("//h3[text()='Error: Postal Code is required']")
 }
 
 async enterFirstName(firstName){
@@ -23,9 +25,17 @@ async enterPostalCode(postalCode){
 async clickContinue(){
     await this.continueBtn.click()
 }
-async isfirstNameErrorMsgVisible(){
+async isFirstNameErrorMsgVisible(){
 
     return await this.firstNameErrorLoc.isVisible()
+}
+async isLastNameErrorMsgVisible(){
+
+    return await this.lastNameErrorLoc.isVisible()
+}
+async isPostalCodeErrorMsgVisible(){
+
+    return await this.postalCodeErrorLoc.isVisible()
 }
 
 
