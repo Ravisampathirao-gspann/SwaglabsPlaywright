@@ -27,4 +27,14 @@ test.describe('Checkout1 page form validation', () => {
     await checkoutonepage.clickContinue();
     await expect(checkoutonepage.isPostalCodeErrorMsgVisible()).toBeTruthy();
   });
+
+   test('Verify successful checkout with valid details', async ({ checkoutonepage }) => {
+    await checkoutonepage.enterFirstName("John");
+    await checkoutonepage.enterLastName("Pathak");
+    await checkoutonepage.enterPostalCode("12345");
+    await checkoutonepage.clickContinue();
+    // await expect(checkoutonepage).toHaveURL("https://www.saucedemo.com/checkout-step-two.html")
+    await expect(checkoutonepage.page).toHaveURL("https://www.saucedemo.com/checkout-step-two.html");
+  });
+
 });
