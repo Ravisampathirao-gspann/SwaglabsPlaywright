@@ -19,11 +19,26 @@ export const test=base.extend({
         await use(new checkoutOnePage(page))
     },
     checkouttwopage:async ({page},use)=>{
-        await use(new checkoutTwoPage(page))  
+        await use(new checkoutTwoPage(page))
     },
-    pageSetUp:async ({loginpage},use)=>{
+    checkoutfinal:async({page},use)=>{
+        await use(new checkoutTwoPage(page))
+    },
 
+    pageSetUp:async ({loginpage},use)=>{
         await loginpage.login("visual_user","secret_sauce")
+        await use();
+    },
+
+    checkoutsetup: async({checkouttwopage},use)=>{
+        await checkouttwopage.ClickCartIcon()
+        await checkouttwopage.ClickCheckoutBTN()
+        await checkouttwopage.EntringDetails('Ram','Ravi','3456')
+        await checkouttwopage.ClickContinueBTN()
+        await use();
+    },
+    checkoutsetupfinal: async({checkoutfinal},use)=>{
+        await checkoutfinal.ClickFinish()
         await use();
     }
 })
