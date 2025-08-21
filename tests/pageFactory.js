@@ -1,16 +1,16 @@
 import {test as base,expect} from '@playwright/test'
 import { cartPage } from '../pages/cartPage';
 import { checkoutOnePage } from '../pages/checkoutOnePage';
-import { productPage } from '../pages/productPage';
+import {ProductPage} from '../pages/productPage'
 import { checkoutTwoPage } from '../pages/checkoutTwoPage';
 import { loginPage } from '../pages/loginPage';
- 
+
 export const test=base.extend({
     loginpage:async ({page},use)=>{
         await use(new loginPage(page))
     },
     productpage:async ({page},use)=>{
-        await use(new productPage(page))
+        await use(new ProductPage(page))
     },
     cartpage:async ({page},use)=>{
         await use(new cartPage(page))
@@ -22,7 +22,7 @@ export const test=base.extend({
         await use(new checkoutTwoPage(page))  
     },
     pageSetUp:async ({loginpage},use)=>{
-       
+
         await loginpage.login("visual_user","secret_sauce")
         await use();
     }
