@@ -2,7 +2,7 @@
 import { test, expect } from './pageFactory.js';
 
 
-test.describe('Checkout1 page form validation', () => {
+test.describe('Checkout1 page testing', () => {
   test.beforeEach(async ({ page,pageSetUp }) => {
     // await loginpage.login("standard_user","secret_sauce")
     await page.locator('[data-test="shopping-cart-link"]').click();
@@ -79,8 +79,6 @@ test.describe('CheckoutComplete page testing', () => {
     })
 
     test("About page navigation from Checkout Complete",async ({checkoutcompletepage})=>{
-
-    
         await checkoutcompletepage.clickAbout()
         await expect(checkoutcompletepage.page).toHaveURL("https://saucelabs.com/")
     })
