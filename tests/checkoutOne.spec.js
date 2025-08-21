@@ -1,48 +1,9 @@
-// import { test, expect } from './pageFactory.js'
-
-// test('test without filling firstname', async ({ page,checkoutonepage }) => {
-//   await page.goto('https://www.saucedemo.com/');
-  
-//   await page.locator('[data-test="username"]').click();
-//   await page.locator('[data-test="username"]').fill('standard_user');
-//   await page.locator('[data-test="password"]').click();
-//   await page.locator('[data-test="password"]').fill('secret_sauce');
-//   await page.locator('[data-test="login-button"]').click();
-//   await page.locator('[data-test="shopping-cart-link"]').click();
-//   await page.locator('[data-test="checkout"]').click();
-
-
-//   await checkoutonepage.enterFirstName("John")
-//   await checkoutonepage.enterPostalCode("12345")
-//   await checkoutonepage.clickContinue()
-//   await expect(checkoutonepage.isFirstNameErrorMsgVisible()).toBeTruthy()
-// })
-
-// test('test without filling lastname', async ({ page,checkoutonepage }) => {
-//   await page.goto('https://www.saucedemo.com/');
-  
-//   await page.locator('[data-test="username"]').click();
-//   await page.locator('[data-test="username"]').fill('standard_user');
-//   await page.locator('[data-test="password"]').click();
-//   await page.locator('[data-test="password"]').fill('secret_sauce');
-//   await page.locator('[data-test="login-button"]').click();
-//   await page.locator('[data-test="shopping-cart-link"]').click();
-//   await page.locator('[data-test="checkout"]').click();
-
-
-//   await checkoutonepage.enterLastName("Pathak")
-//   await checkoutonepage.enterPostalCode("12345")
-//   await checkoutonepage.clickContinue()
-//   await expect(checkoutonepage.isLastNameErrorMsgVisible()).toBeTruthy()
-// })
-
-
 
 import { test, expect } from './pageFactory.js';
 
 test.describe('Checkout1 page form validation', () => {
-  test.beforeEach(async ({ page,loginpage }) => {
-    await loginpage.login("standard_user","secret_sauce")
+  test.beforeEach(async ({ page,loginpage,pageSetUp }) => {
+    // await loginpage.login("standard_user","secret_sauce")
     await page.locator('[data-test="shopping-cart-link"]').click();
     await page.locator('[data-test="checkout"]').click();
   });
