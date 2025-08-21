@@ -14,7 +14,6 @@ test.describe('CartPage Tests @Anil', () => {
   })
 
   test('Remove item from cart', async ({ pageSetUp, cartPageSetUp, cartpage ,page}) => {
-    // await page.waitForLoadState('domcontentloaded');
     await cartpage.openCart()
     await cartpage.removeItemInCartPage()
     await page.waitForLoadState('domcontentloaded');
