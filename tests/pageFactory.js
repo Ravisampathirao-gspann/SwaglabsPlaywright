@@ -22,9 +22,8 @@ export const test=base.extend({
         await use(new checkoutTwoPage(page))  
     },
     pageSetUp:async ({loginpage},use)=>{
-        await loginpage.applaunching()
-        await loginpage.loginToAccount("visual_user","secret_sauce")
-        await loginpage.clickLogin()
+        
+        await loginpage.login("visual_user","secret_sauce")
         await use();
     }
 })
