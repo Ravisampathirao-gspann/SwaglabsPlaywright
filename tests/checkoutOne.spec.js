@@ -1,8 +1,9 @@
 
 import { test, expect } from './pageFactory.js';
 
+
 test.describe('Checkout1 page form validation', () => {
-  test.beforeEach(async ({ page,loginpage,pageSetUp }) => {
+  test.beforeEach(async ({ page,pageSetUp }) => {
     // await loginpage.login("standard_user","secret_sauce")
     await page.locator('[data-test="shopping-cart-link"]').click();
     await page.locator('[data-test="checkout"]').click();
@@ -55,11 +56,38 @@ test.describe('Checkout1 page form validation', () => {
 
 test.describe('CheckoutComplete page testing', () => {
 
+    test.beforeEach(async ({ page,pageSetUp,checkouttwopage,checkoutonepage }) => {
+    await page.locator('[data-test="shopping-cart-link"]').click();
+    await page.locator('[data-test="checkout"]').click();
+    await checkoutonepage.enterFirstName("abcd")
+        await checkoutonepage.enterLastName("efgh")
+        await checkoutonepage.enterPostalCode("12345")
+        await checkoutonepage.clickContinue()
+        await checkouttwopage.ClickFinish()
+  });
+
     test("Verify cart is empty after successful checkout",async ({checkoutcompletepage})=>{
 
-        checkoutcompletepage.cartIconLoc()
+        checkoutcompletepage.clickCartIcon()
+        await expect(checkoutcompletepage.isRemoveBtnVisible()).toBeTruthy()
+    })
+
+    test("Logout from Checkout Complete page",async ({loginpage,checkoutcompletepage})=>{
+
+        await checkoutcompletepage.clickLogout()
+        await expect(loginpage.isAcceptedUsernamesHeadingVisible()).toBeTruthy()
+    })
+
+    test("About page navigation from Checkout Complete",async ({checkoutcompletepage})=>{
+
+    
+        await checkoutcompletepage.clickAbout()
+        await expect(checkoutcompletepage.page).toHaveURL("https://saucelabs.com/")
+    })
+
+    test("Verify order completion message display",async ({checkoutcompletepage})=>{
+
+        await expect(checkoutcompletepage.isAfterOrderMsgHeadingVisible()).toBeTruthy()
     })
     
-
-  
 });
