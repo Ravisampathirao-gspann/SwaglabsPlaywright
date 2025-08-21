@@ -8,6 +8,7 @@ test('checking the functionality of meanu iteam @ravi',async({pageSetUp,checkout
 test("alliteam button @ravi ",async({pageSetUp,checkoutsetup,checkouttwopage,page})=>{
     await checkouttwopage.ClickMeanuBTN()
     await checkouttwopage.ClickAllIteam()
+    await page.waitForLoadState("domcontentloaded")
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html')
 })
 test("fuctionality of logoutBTN @ravi",async({pageSetUp,checkoutsetup,checkouttwopage,page})=>{
