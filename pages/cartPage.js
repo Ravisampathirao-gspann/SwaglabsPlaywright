@@ -7,6 +7,7 @@ export class cartPage{
         this.continueShoppingLoc=page.locator("#continue-shopping")
         this.sauceLabsTshirtLoc=page.locator("#item_1_title_link")
         this.cartQuantityLoc=page.locator(".shopping_cart_badge")
+        this.cartCountLoc=page.locator(".shopping_cart_link")
         this.removeItemHomepageLoc=page.locator("#remove-sauce-labs-backpack")
         this.removeItemFromCartLoc=page.locator("#remove")
         this.backToProductsLoc=page.locator("#back-to-products")
