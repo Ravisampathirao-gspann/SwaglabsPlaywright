@@ -4,6 +4,7 @@ import { checkoutOnePage } from '../pages/checkoutOnePage';
 import {ProductPage} from '../pages/productPage'
 import { checkoutTwoPage } from '../pages/checkoutTwoPage';
 import { loginPage } from '../pages/loginPage';
+import { checkoutCompletePage } from '../pages/checkoutCompletePage';
 
 export const test=base.extend({
     loginpage:async ({page},use)=>{
@@ -21,15 +22,16 @@ export const test=base.extend({
     checkouttwopage:async ({page},use)=>{
         await use(new checkoutTwoPage(page))
     },
+    checkoutcompletepage:async ({page},use)=>{
+        await use(new checkoutCompletePage(page))  
+    },
     checkoutfinal:async({page},use)=>{
         await use(new checkoutTwoPage(page))
     },
-
     pageSetUp:async ({loginpage},use)=>{
         await loginpage.login("visual_user","secret_sauce")
         await use();
     },
-
     checkoutsetup: async({checkouttwopage},use)=>{
         await checkouttwopage.ClickCartIcon()
         await checkouttwopage.ClickCheckoutBTN()
