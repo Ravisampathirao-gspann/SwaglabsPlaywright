@@ -6,12 +6,13 @@ export class loginPage{
     this.loginBtnLoc = page.locator('[data-test="login-button"]')
     this.acceptedUsernamesHeadingLoc = page.locator("//h4[text()='Accepted usernames are:']")
     }
-
+ 
     async login(username,password){
        await this.page.goto('https://www.saucedemo.com/')
        await this.userNameLoc.fill(username)
        await this.passwordLoc.fill(password)
        await this.loginBtnLoc.click()
+
     }
 
     async isAcceptedUsernamesHeadingVisible(){
@@ -19,3 +20,8 @@ export class loginPage{
     }
 
 }
+
+
+
+
+
