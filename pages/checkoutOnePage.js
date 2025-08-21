@@ -8,6 +8,8 @@ constructor(page){
     this.firstNameErrorLoc=page.locator("//h3[text()='Error: First Name is required']")
     this.lastNameErrorLoc = page.locator("//h3[text()='Error: Last Name is required']")
     this.postalCodeErrorLoc = page.locator("//h3[text()='Error: Postal Code is required']")
+    this.cancelBtnLoc = page.locator("#cancel")
+    this.cartIconLoc = page.locator(".shopping_cart_link")
 }
 
 async enterFirstName(firstName){
@@ -36,6 +38,12 @@ async isLastNameErrorMsgVisible(){
 async isPostalCodeErrorMsgVisible(){
 
     return await this.postalCodeErrorLoc.isVisible()
+}
+async clickCancelBtn(){
+    await this.cancelBtnLoc.click()
+}
+async clickCartIcon(){
+    await this.cartIconLoc.click()
 }
 
 
