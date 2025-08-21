@@ -52,3 +52,14 @@ test.describe('Checkout1 page form validation', () => {
 
 
 });
+
+test.describe('CheckoutComplete page testing', () => {
+
+    test("Verify cart is empty after successful checkout",async ({checkoutcompletepage})=>{
+
+        checkoutcompletepage.cartIconLoc()
+    })
+    
+
+  
+});
