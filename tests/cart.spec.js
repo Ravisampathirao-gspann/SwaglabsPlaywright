@@ -1,7 +1,7 @@
 import { test, expect } from './pageFactory.js'
 import { describe } from 'node:test';
 
-test.describe('CartPage Tests', async () => {
+test.describe('CartPage Tests @Anil', () => {
 
   test('Adding single product into the cart', async ({ pageSetUp, cartPageSetUp, cartpage }) => {
     await cartpage.openCart()
@@ -13,14 +13,17 @@ test.describe('CartPage Tests', async () => {
     await expect(cartpage.cartQuantityLoc).toContainText('2');
   })
 
-  test('Remove item from cart', async ({ pageSetUp, cartPageSetUp, cartpage }) => {
+  test('Remove item from cart', async ({ pageSetUp, cartPageSetUp, cartpage ,page}) => {
     await cartpage.openCart()
     await cartpage.removeItemInCartPage()
+    await page.waitForLoadState('domcontentloaded');
     await expect(cartpage.cartQuantityLoc).toHaveCount(0)
   })
 
   test('Moving from cartpage to homepage then cart count not changes', async ({ pageSetUp, cartPageSetUp, page, cartpage }) => {
+    await page.waitForLoadState('domcontentloaded');
     await cartpage.goingBackToHomepage()
+    await page.waitForLoadState('domcontentloaded');
     await expect(cartpage.cartQuantityLoc).toHaveCount(1)
   })
 
@@ -28,18 +31,20 @@ test.describe('CartPage Tests', async () => {
     await cartpage.clickMenu()
     await cartpage.clickOnLogout()
     await loginpage.loginToAccount("visual_user", "secret_sauce")
-    await loginpage.clickLogin()
     await expect(cartpage.cartQuantityLoc).toContainText('1')
   })
 
   test('Clicking add to cart when we are on home page', async ({ pageSetUp, page, cartpage }) => {
+    await page.waitForLoadState('domcontentloaded');
     await cartpage.clickAddCartOnHomePage()
+    await page.waitForLoadState('domcontentloaded');
     await expect(cartpage.cartQuantityLoc).toHaveCount(1)
   })
 
   test('Cart persistance on page refresh', async ({ pageSetUp, cartPageSetUp, cartPageSetUpSecondItem, page, cartpage }) => {
     await cartpage.openCart()
     await page.reload()
+    await page.waitForLoadState("domcontentloaded");
     await expect(cartpage.cartQuantityLoc).toContainText('2')
   })
 
@@ -55,7 +60,7 @@ test.describe('CartPage Tests', async () => {
       await cartpage.clickTwitterOnFooter()
     ]);
 
-    await newPage.waitForLoadState();
+    await newPage.waitForLoadState("domcontentloaded");
     await expect(newPage).toHaveURL("https://x.com/saucelabs");
     await newPage.close()
   })
