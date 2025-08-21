@@ -9,13 +9,30 @@ export class ProductPage {
     this.cartIcon = page.locator('[data-test="shopping-cart-link"]');
   }
 
-  async verifyBackpackDetails() {
-    await expect(this.backpackImage).toBeVisible();
-    await expect(this.backpackTitle).toBeVisible();
-    await expect(this.backpackDescription).toBeVisible();
-    await expect(this.backpackPrice).toBeVisible();
-    await expect(this.addToCartButton).toBeVisible();
+  async verifyBackpackImage() {
+    
+    return await this.backpackImage.isVisible()
   }
+  async verifyBackpackTitle() {
+    
+    return await this.backpackTitle.isVisible()
+  }
+  async verifyBackpackDescription() {
+    
+    return await this.backpackDescription.isVisible()
+  }
+  async verifyBackpackPrice() {
+    
+    return await this.backpackPrice.isVisible()
+    
+  }
+  async verifyAddToCartButton() {
+    
+    return await this.addToCartButton.isVisible()
+
+  }
+
+
 
   async addToCart() {
     await this.addToCartButton.click();
