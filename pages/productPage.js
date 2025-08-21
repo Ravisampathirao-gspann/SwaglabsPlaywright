@@ -32,13 +32,16 @@ export class ProductPage {
 
   }
 
-
-
+  async verifyInventoryPageTitle(){
+    return await this.InventoryPageTitle.isVisible()
+  }
   async addToCart() {
     await this.addToCartButton.click();
     await this.cartIcon.click();
   }
 }
+
+
 
             
 

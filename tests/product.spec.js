@@ -3,9 +3,8 @@ import { loginPage } from '../pages/loginPage.js';
 import { test, expect } from './pageFactory.js';
 
 test('Verify backpack image @shagun', async ({ page, productpage, cartpage, loginpage }) => {
-await page.goto('https://www.saucedemo.com/inventory.html');
-
-  await expect(productpage.verifyBackpackImage()).toBeTruthy()
+   await page.goto('https://www.saucedemo.com/inventory.html');
+   await expect(productpage.verifyBackpackImage()).toBeTruthy()
 
 });
 
@@ -28,6 +27,7 @@ test('verify AddToCartButton @shagun',async({page, productpage, cartpage, loginp
     await page.goto('https://www.saucedemo.com/inventory.html');
     await expect(productpage.verifyAddToCartButton()).toBeTruthy()
 })
+
 
 
 
