@@ -11,6 +11,6 @@ export class loginPage{
        await this.userNameLoc.fill(username)
        await this.passwordLoc.fill(password)
        await this.loginBtnLoc.click()
-   
- 
+
 }}
+
