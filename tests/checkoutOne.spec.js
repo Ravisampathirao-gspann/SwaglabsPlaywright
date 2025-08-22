@@ -96,15 +96,15 @@ test.describe('CheckoutComplete page testing @Karan', () => {
     })
     test("Navigation to Reset App State from Checkout Two page @Karan",async ({checkoutcompletepage})=>{
 
-        const previousUrl = checkoutonepage.page.url();
+        const previousUrl = checkoutcompletepage.page.url();
 
         try{
          await Promise.all([
-         checkoutonepage.page.waitForNavigation({ timeout: 3000 }),
-         checkoutonepage.clickResetAppState()
+         checkoutcompletepage.page.waitForNavigation({ timeout: 3000 }),
+         checkoutcompletepage.clickResetAppState()
         ]);
         
-         const newUrl = checkoutonepage.page.url();
+         const newUrl = checkoutcompletepage.page.url();
          expect(newUrl).not.toBe(previousUrl);
         }
     
