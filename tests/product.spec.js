@@ -57,6 +57,7 @@ test('Verify Reset sidebar link is visible after opening menu @shagun', async ({
   await page.goto('https://www.saucedemo.com/inventory.html');
   await productpage.openMenu();
   const isResetVisible = await productpage.verifyResetSidebarLink();
+  await page.waitForLoadState('domcontentloaded')
   await expect(isResetVisible).toBeTruthy();
 });
 
