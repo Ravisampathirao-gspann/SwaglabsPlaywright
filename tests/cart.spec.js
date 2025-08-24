@@ -13,7 +13,7 @@ test.describe('CartPage Tests @Anil', () => {
     await expect(cartpage.cartQuantityLoc).toContainText('2');
   })
 
-  test('Remove item from cart', async ({ pageSetUp, cartPageSetUp, cartpage ,page}) => {
+  test('Remove item from cart', async ({ pageSetUp, cartPageSetUp, cartpage, page }) => {
     await cartpage.openCart()
     await cartpage.removeItemInCartPage()
     await page.waitForLoadState('domcontentloaded');
@@ -53,6 +53,7 @@ test.describe('CartPage Tests @Anil', () => {
     await cartpage.clickContinueShopping()
     await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html")
   })
+
   test('Cart UI and Accessibility check for Twitter', async ({ pageSetUp, page, cartpage, context }) => {
     await cartpage.openCart()
     const [newPage] = await Promise.all([
@@ -64,6 +65,7 @@ test.describe('CartPage Tests @Anil', () => {
     await expect(newPage).toHaveURL("https://x.com/saucelabs");
     await newPage.close()
   })
+
   test('Cart UI and Accessibility check for linkedIn', async ({ pageSetUp, page, cartpage, context }) => {
     await cartpage.openCart()
     const [newPage] = await Promise.all([
