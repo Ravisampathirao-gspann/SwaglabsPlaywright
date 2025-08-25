@@ -24,9 +24,11 @@ export class cartPage{
     async addingItemToCart(){
         await this.addToCartLoc.click();
     }
+
     async openCart(){
         await this.clickCartIconLoc.click();
     }
+    
     async clickBackToProducts(){
         await this.backToProductsLoc.click();
     }
