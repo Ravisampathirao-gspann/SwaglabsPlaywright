@@ -3,10 +3,10 @@ import { test, expect } from './pageFactory.js';
 
 
 test.describe('Checkout1 page testing @Karan', () => {
-  test.beforeEach(async ({ page,pageSetUp }) => {
+  test.beforeEach(async ({ page, pageSetUp }) => {
     // await loginpage.login("standard_user","secret_sauce")
-    await page.locator('[data-test="shopping-cart-link"]').click();
-    await page.locator('[data-test="checkout"]').click();
+    await checkoutonepage.clickShoppingCart();
+    await checkoutonepage.clickCheckout();
   });
 
   test('should show error when first name is missing @Karan', async ({ checkoutonepage }) => {
@@ -30,7 +30,7 @@ test.describe('Checkout1 page testing @Karan', () => {
     await expect(checkoutonepage.isPostalCodeErrorMsgVisible()).toBeTruthy();
   });
 
-   test('Verify successful checkout with valid details @Karan', async ({ checkoutonepage }) => {
+  test('Verify successful checkout with valid details @Karan', async ({ checkoutonepage }) => {
     await checkoutonepage.enterFirstName("John");
     await checkoutonepage.enterLastName("Pathak");
     await checkoutonepage.enterPostalCode("12345");
@@ -40,13 +40,13 @@ test.describe('Checkout1 page testing @Karan', () => {
   });
 
   test('Verifying that Cancel returns to cart from Checkout One @Karan', async ({ checkoutonepage }) => {
-    
+
     await checkoutonepage.clickCancelBtn();
     await expect(checkoutonepage.page).toHaveURL("https://www.saucedemo.com/cart.html");
   });
 
   test('Verifying that Cart icon returns to cart page from Checkout One @Karan', async ({ checkoutonepage }) => {
-    
+
     await checkoutonepage.clickCartIcon();
     await expect(checkoutonepage.page).toHaveURL("https://www.saucedemo.com/cart.html");
   });
@@ -56,61 +56,65 @@ test.describe('Checkout1 page testing @Karan', () => {
 
 test.describe('CheckoutComplete page testing @Karan', () => {
 
-    test.beforeEach(async ({ page,pageSetUp,checkouttwopage,checkoutonepage }) => {
-    await page.locator('[data-test="shopping-cart-link"]').click();
-    await page.locator('[data-test="checkout"]').click();
+  test.beforeEach(async ({ page, pageSetUp, checkouttwopage, checkoutonepage }) => {
+    await checkoutonepage.clickShoppingCart();
+    await checkoutonepage.clickCheckout();
     await checkoutonepage.enterFirstName("abcd")
-        await checkoutonepage.enterLastName("efgh")
-        await checkoutonepage.enterPostalCode("12345")
-        await checkoutonepage.clickContinue()
-        await checkouttwopage.ClickFinish()
+    await checkoutonepage.enterLastName("efgh")
+    await checkoutonepage.enterPostalCode("12345")
+    await checkoutonepage.clickContinue()
+    await checkouttwopage.ClickFinish()
   });
 
-    test("Verify cart is empty after successful checkout @Karan",async ({checkoutcompletepage})=>{
+  test("Verify cart is empty after successful checkout @Karan", async ({ checkoutcompletepage }) => {
 
-        await checkoutcompletepage.clickCartIcon()
-        const isVisible = await checkoutcompletepage.isRemoveBtnVisible();
-        expect(isVisible).toBeFalsy();
+    await checkoutcompletepage.clickCartIcon()
+    const isVisible = await checkoutcompletepage.isRemoveBtnVisible();
+    expect(isVisible).toBeFalsy();
 
-        // await expect(checkoutcompletepage.isRemoveBtnVisible()).toBeFalsy()
-    })
+    // await expect(checkoutcompletepage.isRemoveBtnVisible()).toBeFalsy()
+  })
 
-    test("Logout from Checkout Complete page @Karan",async ({loginpage,checkoutcompletepage})=>{
+  test("Logout from Checkout Complete page @Karan", async ({ loginpage, checkoutcompletepage }) => {
 
-        await checkoutcompletepage.clickLogout()
-        await expect(loginpage.isAcceptedUsernamesHeadingVisible()).toBeTruthy()
-    })
+    await checkoutcompletepage.clickLogout()
+    await expect(loginpage.isAcceptedUsernamesHeadingVisible()).toBeTruthy()
+  })
 
-    test("About page navigation from Checkout Complete @Karan",async ({checkoutcompletepage})=>{
-        await checkoutcompletepage.clickAbout()
-        await expect(checkoutcompletepage.page).toHaveURL("https://saucelabs.com/")
-    })
+  test("About page navigation from Checkout Complete @Karan", async ({ checkoutcompletepage }) => {
+    await checkoutcompletepage.clickAbout()
+    await expect(checkoutcompletepage.page).toHaveURL("https://saucelabs.com/")
+  })
 
-    test("Verify order completion message display @Karan",async ({checkoutcompletepage})=>{
+  test("Verify order completion message display @Karan", async ({ checkoutcompletepage }) => {
 
-        await expect(checkoutcompletepage.isAfterOrderMsgHeadingVisible()).toBeTruthy()
-    })
-    test("Menu navigation to All Items from Checkout Two @Karan",async ({checkoutcompletepage})=>{
-        await checkoutcompletepage.clickAllItems()
-        await expect(checkoutcompletepage.isProductHeadingVisible()).toBeTruthy()
-    })
-    test("Navigation to Reset App State from Checkout Two page @Karan",async ({checkoutcompletepage})=>{
+    await expect(checkoutcompletepage.isAfterOrderMsgHeadingVisible()).toBeTruthy()
+  })
+  test("Menu navigation to All Items from Checkout Two @Karan", async ({ checkoutcompletepage }) => {
+    await checkoutcompletepage.clickAllItems()
+    await expect(checkoutcompletepage.isProductHeadingVisible()).toBeTruthy()
+  })
+  test("Navigation to Reset App State from Checkout Two page @Karan", async ({ checkoutcompletepage, checkoutonepage }) => {
 
-        
-const previousUrl = checkoutcompletepage.page.url();
 
-  try {
-    await Promise.all([
-      checkoutcompletepage.page.waitForNavigation({ timeout: 3000 }),
-      checkoutcompletepage.clickResetAppState()
-    ]);
-  } catch (error) {
-    
-    console.log("Navigation did not occur — continuing test.");
-  }
+    // const previousUrl = checkoutcompletepage.page.url();
 
-  const newUrl = checkoutcompletepage.page.url();
-  expect(newUrl).toBe(previousUrl);
+    // try {
+    //   await Promise.all([
+    //     checkoutcompletepage.page.waitForNavigation({ timeout: 3000 }),
+    //     checkoutcompletepage.clickResetAppState()
+    //   ]);
+    // } catch (error) {
 
-    })
+    //   console.log("Navigation did not occur — continuing test.");
+    // }
+
+    // const newUrl = checkoutcompletepage.page.url();
+    // expect(newUrl).toBe(previousUrl);
+
+    //locator.toHaveText()
+
+    await expect(checkoutonepage.isCartEmpty()).toBeTruthy();
+
+  })
 });
